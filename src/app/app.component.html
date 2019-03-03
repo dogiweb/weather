@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>{{title}}</h1>
+
+  <div class="row">
+    <div class="form-group">
+
+      <div class="col-md-3">
+        <label for="location">Choose date range:</label>
+        <input class="form-control" (change)="fetchData()" value="2010. 01. 10." placeholder="From" type="date"
+               [(ngModel)]="date_from">
+      </div>
+      <div class="col-md-3 right">
+        <input class="form-control" (change)="fetchData()" value="2018. 10. 11." placeholder="To" type="date"
+               [(ngModel)]="date_to">
+      </div>
+
+        <div class="col-md-3">
+          <label for="location">Choose location:</label>
+          <select [(ngModel)]="location" (change)="fetchData()" class="form-control" id="location">
+            <option>UK</option>
+            <option>England</option>
+            <option>Scotland</option>
+            <option>Wales</option>
+          </select>
+
+        </div>
+        <label for="location">Choose metric:</label>
+        <div class="col-md-3">
+          <select [(ngModel)]="metric" (change)="fetchData()" class="form-control">
+            <option value="Tmax">Max. temperature</option>
+            <option value="Tmin">Min. temperature</option>
+            <option value="Rainfall">Rainfall</option>
+          </select>
+        </div>
+      </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4" *ngIf="date_from && date_to">
+      <button class="btn btn-primary form-control" (click)="fetchData()">Refresh manually (just in case)</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <app-piechart-component *ngIf="displayChart"
+                            [dataLabelForChart]="dataLabelForChart"
+                            [dataTypes]="dataTypes"
+                            [dataForChart]="dataForChart"></app-piechart-component>
+  </div>
+
+</div>
+
+
+
